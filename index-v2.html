@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172554">
+  <title>Castle Card — A Brighter Quest</title>
+  <link rel="stylesheet" href="Style-v2.css">
+  <script src="Script-v2.js" defer></script>
+</head>
+<body>
+  <div class="sky-decoration sky-decoration-one" aria-hidden="true"></div>
+  <div class="sky-decoration sky-decoration-two" aria-hidden="true"></div>
+  <main class="app-shell">
+    <header class="site-header">
+      <a class="brand" href="index-v2.html" aria-label="Castle Card home">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span>CASTLE CARD <span class="edition">QUEST 02</span></span>
+      </a>
+      <a class="original-link" href="index.html">Visit the original game <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> YOUR LITTLE CORNER OF COURAGE</p>
+        <h1 id="page-title">Every day is<br><span>a new quest.</span></h1>
+        <p class="hero-description">Check in with yourself, choose a mini-game, and collect a small win. There is no wrong way to show up today.</p>
+        <div class="hero-facts" aria-label="Game features">
+          <span><span aria-hidden="true">♡</span> A gentle check-in</span>
+          <span><span aria-hidden="true">✧</span> Two quick games</span>
+        </div>
+      </div>
+      <div class="castle-illustration" aria-hidden="true">
+        <span class="illustration-star star-one">✦</span>
+        <span class="illustration-star star-two">✧</span>
+        <div class="moon"></div>
+        <div class="castle">
+          <div class="castle-tower castle-tower-left"><i></i></div>
+          <div class="castle-tower castle-tower-center"><i></i></div>
+          <div class="castle-tower castle-tower-right"><i></i></div>
+          <div class="castle-wall"><i></i><i></i><i></i></div>
+          <div class="castle-door"></div>
+        </div>
+        <div class="castle-hill"></div>
+      </div>
+    </section>
+
+    <section class="panel checkin-panel" id="check-in" aria-labelledby="checkin-title">
+      <div class="panel-heading">
+        <span class="step-label">FIRST · CHECK IN</span>
+        <span class="step-number" aria-hidden="true">01</span>
+      </div>
+      <h2 id="checkin-title">How is today feeling?</h2>
+      <p class="panel-intro">Pick what feels closest. You can keep it to yourself—this check-in stays right here in your browser.</p>
+      <div class="mood-options" role="group" aria-label="Choose how today is feeling">
+        <button class="mood-option" type="button" data-mood="good" aria-pressed="false">
+          <span class="mood-icon mood-sun" aria-hidden="true">☀</span>
+          <span class="mood-label">Pretty good</span>
+          <span class="mood-hint">There are some bright spots</span>
+        </button>
+        <button class="mood-option" type="button" data-mood="hard" aria-pressed="false">
+          <span class="mood-icon mood-cloud" aria-hidden="true">☁</span>
+          <span class="mood-label">A little hard</span>
+          <span class="mood-hint">I could use a gentle moment</span>
+        </button>
+      </div>
+      <div class="reflection" id="reflection" hidden>
+        <label for="reflection-note">Want to say what is on your mind? <span>Optional</span></label>
+        <textarea id="reflection-note" maxlength="240" rows="3" placeholder="Write a little, or leave this blank."></textarea>
+        <p class="privacy-note">No account, no saving, no pressure to share.</p>
+      </div>
+      <div class="checkin-footer">
+        <p id="checkin-message" class="live-message" aria-live="polite">Choose either option to continue.</p>
+        <button class="button button-primary" id="continue-button" type="button" disabled>Continue to your quest <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section class="panel game-menu" id="game-menu" aria-labelledby="menu-title" hidden>
+      <div class="panel-heading">
+        <span class="step-label">YOUR NEXT STEP</span>
+        <span class="step-number" aria-hidden="true">02</span>
+      </div>
+      <h2 id="menu-title">Choose a mini-quest</h2>
+      <p class="panel-intro" id="menu-intro">A few minutes is enough. Pick whichever game sounds fun.</p>
+      <div class="game-cards">
+        <article class="game-card quiz-card">
+          <div class="game-icon" aria-hidden="true">✎</div>
+          <p class="game-tag">THINK &amp; REFLECT · 5 QUESTIONS</p>
+          <h3>The Kindness Quiz</h3>
+          <p>Explore good days, hard days, and small ways to care for yourself and others.</p>
+          <button class="button button-primary" type="button" data-open="quiz">Start the quiz <span aria-hidden="true">→</span></button>
+        </article>
+        <article class="game-card reaction-card">
+          <div class="game-icon" aria-hidden="true">⚡</div>
+          <p class="game-tag">QUICK CHALLENGE · ABOUT 10 SECONDS</p>
+          <h3>Castle Reflex</h3>
+          <p>Wait for the green signal, then tap quickly. An early tap just means you can try again.</p>
+          <button class="button button-secondary" type="button" data-open="reaction">Try the reflex game <span aria-hidden="true">→</span></button>
+        </article>
+      </div>
+      <button class="text-button" type="button" data-open="checkin">← Change my check-in</button>
+    </section>
+
+    <section class="panel game-panel" id="quiz-screen" aria-labelledby="quiz-title" hidden>
+      <div class="panel-heading">
+        <span class="step-label">MINI-QUEST · KINDNESS QUIZ</span>
+        <span class="score-pill" id="score-label">Score <strong>0</strong> / 5</span>
+      </div>
+      <div class="progress-track" id="quiz-progress" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0">
+        <span id="quiz-progress-fill"></span>
+      </div>
+      <p class="question-count" id="question-count">QUESTION 1 OF 5</p>
+      <h2 id="quiz-title">Loading your first question…</h2>
+      <p class="quiz-hint">Choose the answer that feels right to you. You can try another if you miss.</p>
+      <div class="answer-list" id="answers"></div>
+      <p class="live-message quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
+      <div class="panel-actions">
+        <button class="text-button" type="button" data-open="menu">← Game menu</button>
+        <button class="button button-primary" id="next-button" type="button" disabled>Next question <span aria-hidden="true">→</span></button>
+      </div>
+      <div class="quiz-result" id="quiz-result" hidden>
+        <span class="result-sparkle" aria-hidden="true">✦</span>
+        <p class="step-label">QUEST COMPLETE</p>
+        <h3 id="result-title">You made it!</h3>
+        <p id="result-message"></p>
+        <p class="final-score" id="final-score"></p>
+        <div class="result-actions">
+          <button class="button button-primary" id="replay-quiz" type="button">Play again</button>
+          <button class="button button-secondary" type="button" data-open="menu">Choose another game</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel game-panel reaction-panel" id="reaction-screen" aria-labelledby="reaction-title" hidden>
+      <div class="panel-heading">
+        <span class="step-label">MINI-QUEST · CASTLE REFLEX</span>
+        <span class="step-number" aria-hidden="true">⚡</span>
+      </div>
+      <p class="game-tag">HOW TO PLAY</p>
+      <h2 id="reaction-title">Ready when you are.</h2>
+      <p class="panel-intro">Press start and wait. When the button turns green, tap it as quickly as you can. Tap too early? No worries—just start again.</p>
+      <div class="reaction-orb" id="reaction-orb" aria-hidden="true"><span>✦</span></div>
+      <p class="live-message reaction-instructions" id="reaction-instructions" aria-live="polite">The signal appears after a random pause. Get set!</p>
+      <button class="button button-reaction" id="reaction-button" type="button">Start reaction test <span aria-hidden="true">→</span></button>
+      <p class="reaction-result" id="reaction-time" aria-live="polite"></p>
+      <button class="text-button" type="button" data-open="menu">← Back to mini-quests</button>
+    </section>
+
+    <footer class="site-footer">
+      <span>Small steps count. So does taking a pause.</span>
+      <a href="index.html">Castle Card · Original edition</a>
+    </footer>
+  </main>
+</body>
+</html>
