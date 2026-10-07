@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Debug note: if assistive technology announces the wrong language, check this document-level setting. -->
+  <meta charset="UTF-8">
+  <!-- Debug note: this viewport declaration should keep the card fitted to mobile screens. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Debug note: the browser tab title is set here, independently of the visible page heading. -->
+  <title>Castle Card</title>
+  <!-- Debug note: a missing castle/card layout usually means this stylesheet path or filename does not resolve. -->
+  <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+  <!-- Debug note: this main element wraps the page content and is centered by the body grid styles. -->
+  <main class="card">
+    <!-- Debug note: this decorative layer should never capture clicks or be exposed to assistive technology. -->
+    <div class="castle-bg" aria-hidden="true">
+      <!-- Debug note: an empty wall element is expected; its castle shape comes from CSS dimensions and color. -->
+      <div class="castle-wall"></div>
+      <!-- Debug note: tower classes provide separate positions and heights for the three CSS-drawn towers. -->
+      <div class="castle-tower tower-left"></div>
+      <div class="castle-tower tower-middle"></div>
+      <div class="castle-tower tower-right"></div>
+    </div>
+
+    <!-- Debug note: foreground content should remain above the decorative castle background. -->
+    <div class="card-content">
+      <!-- Debug note: verify this static heading remains visible when JavaScript switches between game screens. -->
+      <h1>Welcome to the Castle!</h1>
+      <p>You are brave, creative, and capable.</p>
+
+      <!-- The menu is the first screen; JavaScript switches to the selected game. -->
+      <!-- Debug note: the game-menu ID is queried by Script.js to hide this section when a game opens. -->
+      <section id="game-menu" aria-labelledby="game-menu-title">
+        <!-- Debug note: aria-labelledby must continue pointing to the heading ID immediately below. -->
+        <h2 id="game-menu-title">Game Menu</h2>
+        <!-- Debug note: each menu link's fragment must match the destination ID and its JavaScript selector. -->
+        <ul>
+          <li><a href="#quiz">Take Quiz</a></li>
+          <li><a href="#reaction-game">Reaction Game</a></li>
+        </ul>
+      </section>
+
+      <!-- hidden keeps the quiz out of view until the player chooses it. -->
+      <!-- Debug note: remove hidden only through the menu interaction so the initial screen stays consistent. -->
+      <section id="quiz" aria-labelledby="quiz-title" hidden>
+        <!-- Debug note: this title supplies the accessible name for the quiz section. -->
+        <h2 id="quiz-title">Quiz Game</h2>
+        <!-- Debug note: Script.js replaces this heading text for each question and at quiz completion. -->
+        <h3 id="question"></h3>
+        <!-- Debug note: answer buttons are recreated in this container; an empty container is valid between states. -->
+        <div id="answers"></div>
+        <!-- Debug note: feedback is updated after an answer and announced through the polite live region. -->
+        <p id="feedback" aria-live="polite"></p>
+        <!-- Debug note: this control begins disabled and is enabled only when the answer is correct. -->
+        <button id="next-button" type="button">Next Question</button>
+        <!-- Debug note: this control returns to the menu without navigating away from the document. -->
+        <button id="quiz-menu-button" type="button">Back to games</button>
+      </section>
+
+      <!-- The reaction game starts with its button ready to begin a test. -->
+      <!-- Debug note: this section shares the hidden-screen behavior used by the quiz panel. -->
+      <section id="reaction-game" aria-labelledby="reaction-title" hidden>
+        <!-- Debug note: keep this heading ID aligned with the section's aria-labelledby value. -->
+        <h2 id="reaction-title">Reaction Game</h2>
+        <!-- Debug note: JavaScript replaces this text for waiting, early-click, and result states. -->
+        <p id="reaction-instructions">Press start, then click only when the button turns green.</p>
+        <!-- Debug note: the reaction-ready class is the CSS hook for the green signal state. -->
+        <button id="reaction-button" type="button">Start reaction test</button>
+        <!-- Debug note: timing results are inserted here and announced without moving focus. -->
+        <p id="reaction-time" aria-live="polite"></p>
+        <!-- Debug note: this ID is used by Script.js to return from the reaction screen to the menu. -->
+        <button id="reaction-menu-button" type="button">Back to games</button>
+      </section>
+    </div>
+    </main>
+<!-- Debug note: defer waits for HTML parsing, so Script.js can query all of the IDs above at startup. -->
+<script src="Script.js" defer></script>
+
+</body>
+</html>

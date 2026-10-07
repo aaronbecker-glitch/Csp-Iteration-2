@@ -1,0 +1,211 @@
+/* Page background and font */
+body {
+  /* Debug note: grid centering is the primary mechanism that places the card in the viewport. */
+  display: grid;
+  place-items: center;
+  /* Debug note: min-height keeps vertical centering effective even on short-content pages. */
+  min-height: 100vh;
+  margin: 0;
+  /* Debug note: padding creates a mobile-safe gutter around the card. */
+  padding: 20px;
+  /* Debug note: border-box includes the gutter in the body's declared available size. */
+  box-sizing: border-box;
+  font-family: Georgia, serif;
+  /* Debug note: inherited white text should remain readable against the dark page background. */
+  color: white;
+  /* Debug note: this gradient paints the viewport behind the card. */
+  background: linear-gradient(#101a2e, #263b5b);
+}
+
+/* Main card */
+.card {
+  /* Debug note: relative positioning anchors the absolute castle decoration inside the card. */
+  position: relative;
+  /* Debug note: min() makes the card responsive while retaining its desktop width cap. */
+  width: min(100%, 700px);
+  /* Debug note: this minimum gives the card room for content and the castle artwork. */
+  min-height: 500px;
+  /* Debug note: overflow clipping keeps decorative shapes within the rounded card boundary. */
+  overflow: hidden;
+  text-align: center;
+  /* Debug note: border and radius define the visible gold frame and rounded corners. */
+  border: 2px solid #d6b56d;
+  border-radius: 20px;
+  background: linear-gradient(#385578, #a7afbd);
+  /* Debug note: the alpha component on the shadow color keeps the card shadow translucent. */
+  box-shadow: 0 12px 30px #0008;
+}
+
+/* Shared content area and game panels */
+.card-content {
+  position: relative;
+  /* Debug note: the content layer must stack above the absolute castle background. */
+  z-index: 1;
+  /* Debug note: horizontal padding prevents text and controls touching the card edge. */
+  padding: 40px 20px;
+}
+
+h1 {
+  margin-top: 0;
+  color: #ffe29a;
+}
+
+#quiz,
+#game-menu,
+#reaction-game {
+  /* Debug note: the shared selector ensures all three screens keep a consistent panel width and spacing. */
+  max-width: 520px;
+  margin: 30px auto 0;
+  padding: 20px;
+  border-radius: 14px;
+  /* Debug note: the translucent dark panel provides contrast over the castle art. */
+  background: #101a2ee8;
+}
+
+#question {
+  /* Debug note: reserving prompt height reduces vertical layout shifts between questions. */
+  min-height: 2em;
+}
+
+/* Castle drawing */
+.castle-bg {
+  /* Debug note: absolute positioning fills the card because its parent establishes the positioning context. */
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  /* Debug note: pointer-events keeps this decorative layer from blocking game controls. */
+  pointer-events: none;
+}
+
+.castle-wall,
+.castle-tower {
+  /* Debug note: the common bottom anchor aligns the wall and all towers along one baseline. */
+  position: absolute;
+  bottom: 0;
+  background: #18202e;
+}
+
+.castle-wall {
+  left: 15%;
+  width: 70%;
+  height: 34%;
+}
+
+.castle-tower {
+  width: 18%;
+  height: 48%;
+}
+
+.castle-tower::before {
+  /* Debug note: this pseudo-element draws each roof, so it requires content even though it has no text. */
+  position: absolute;
+  top: -25%;
+  left: -8%;
+  width: 116%;
+  height: 28%;
+  content: "";
+  background: #18202e;
+  /* Debug note: the triangular polygon forms the roof silhouette; verify clip-path support if it disappears. */
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.tower-left {
+  left: 8%;
+  height: 46%;
+}
+
+.tower-middle {
+  left: 41%;
+  height: 62%;
+}
+
+.tower-right {
+  right: 8%;
+  height: 46%;
+}
+
+/* The castle windows were changed from yellow to a soft white glow. */
+.castle-tower::after {
+  /* Debug note: this pseudo-element draws the window glow within each tower body. */
+  position: absolute;
+  top: 35%;
+  left: 42%;
+  width: 16%;
+  height: 18%;
+  content: "";
+  border-radius: 50% 50% 0 0;
+  background: #e8e6e2;          /* Changes windows from yellow to white */
+  box-shadow: 0 0 10px #e1ded6;   /* Changes windows from yellow to white */
+}
+
+/* Answer and next-question buttons */
+#answers button,
+#next-button,
+#quiz-menu-button,
+#reaction-menu-button {
+  /* Debug note: these shared rules align spacing and click affordance across quiz and navigation controls. */
+  margin: 6px;
+  padding: 10px 16px;
+  font: inherit;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#answers button {
+  color: #18202e;
+  background: #f2eee4;
+}
+
+#answers button:hover {
+  /* Debug note: answer hover color only affects pointer hover, not correctness feedback. */
+  background: #ffe29a;
+}
+
+#next-button,
+#quiz-menu-button,
+#reaction-menu-button {
+  color: #18202e;
+  background: #f5c96b;
+}
+
+#next-button:hover:not(:disabled),
+#quiz-menu-button:hover,
+#reaction-menu-button:hover {
+  background: #ffe29a;
+}
+
+/* JavaScript adds this class only after the reaction signal appears. */
+#reaction-button {
+  /* Debug note: this base style is used until JavaScript adds the reaction-ready class. */
+  margin: 6px;
+  padding: 10px 16px;
+  font: inherit;
+  border: 0;
+  border-radius: 8px;
+  color: #18202e;
+  background: #f5c96b;
+  cursor: pointer;
+}
+
+#reaction-button:hover {
+  background: #ffe29a;
+}
+
+#reaction-button.reaction-ready {
+  /* Debug note: this selector must match the class toggled by Script.js when the timed signal appears. */
+  color: #102713;
+  background: #64df79;
+}
+
+button:disabled {
+  /* Debug note: disabled styling communicates that a control cannot currently be activated. */
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+button:focus-visible {
+  /* Debug note: retain a visible keyboard-focus indicator when navigating controls without a mouse. */
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
